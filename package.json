@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "boom": "concurrently \"yarn server\" \"yarn client\"",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,9 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "nodemon": "^2.0.2"
   }
 }
