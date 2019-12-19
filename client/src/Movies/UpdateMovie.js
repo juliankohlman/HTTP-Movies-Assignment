@@ -32,7 +32,6 @@ export const UpdateMovie = props => {
 }
   */
   const handleChange = e => {
-    console.log(update);
     setMovie({
       ...movie,
       [e.target.name]: e.target.value
