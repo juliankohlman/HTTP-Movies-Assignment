@@ -32,7 +32,7 @@ export default class Movie extends React.Component {
   };
 
   updateMovie = () => {
-    // update movie logic here
+    // grabbing movie id from state and attaching it to update-movie path
     console.log(this.state.movie.id);
     let updateId = this.state.movie.id;
     this.props.history.push(`/update-movie/${updateId}`);

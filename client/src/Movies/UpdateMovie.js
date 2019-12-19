@@ -3,6 +3,8 @@ import axios from "axios";
 
 export const UpdateMovie = props => {
   console.log(props);
+  // grab id from dynamic url via match object
+  // https://reacttraining.com/react-router/web/api/match
   let id = props.match.params.id;
   console.log("id", id);
 
@@ -13,16 +15,12 @@ export const UpdateMovie = props => {
     stars: []
   });
 
-  // const [update, setUpdate] = useState(movie);
-
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
       .then(res => setMovie(res.data))
       .catch(err => console.log(err.response));
   }, []);
-
-  console.log(movie);
 
   /* 
   {
@@ -41,20 +39,10 @@ export const UpdateMovie = props => {
     });
   };
 
-  /* 
-  {movie.stars.map((star, index) => {
-            return (
-              <input
-                type="text"
-                name="stars"
-                value={star}
-                onChange={e => handleStars(e.target.value, index)}
-              />
-            );
-          })}
-  */
   const handleStars = (value, idx) => {
+    // idx comes from outer map on line #93 thats what will get passed into handleStars
     // based on the index set star equal to e.target.value else star remains unchanged
+    // value === e.target.value from line #99
     const changedStar = movie.stars.map((star, i) =>
       i === idx ? value : star
     );
@@ -68,7 +56,6 @@ export const UpdateMovie = props => {
       .then(res => {
         console.log(res);
         setMovie(res.data);
-        // setUpdate({});
         props.history.push(`/movies/${id}`);
       })
       .catch(err => console.error(err));
@@ -109,15 +96,12 @@ export const UpdateMovie = props => {
               type="text"
               name="stars"
               value={star}
-              onChange={e => handleStars(e, index)}
+              onChange={e => handleStars(e.target.value, index)}
             />
           );
         })}
         <button>Update {movie.title}</button>
       </form>
-      {/* <form>
-        <input type="text" name="title" id="" />
-      </form> */}
     </div>
   );
 };
